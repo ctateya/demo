@@ -4,7 +4,7 @@ var CACHE_NAME = 'cache-v2';
 //キャッシュに入れるリソースのパス
 var urlsToCache = [
   '/',
-  '/manifest.json',
+  'manifest.json',
 ];
 
 
