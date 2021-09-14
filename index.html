@@ -25,24 +25,14 @@
    {
     body: "ブログの更新をお知らせします!",
     icon: 'casley_logo.png',
-    timeout: 8000,
+    timeout: 4000,
     onClick: function () {
     window.focus(); 
     this.close();
     }
   })
 }
-      var remindTime = new Date("2021/09/14 19:01:00")
-      var today = new Date;
-      setTimeout(function(){
-        pushMessage(); 
-      }, 1000);
-      
-      function pushMessage(){
-        if(remindTime == today){
-          push();
-        }
-      };
+     
 </script>
     
      <script>
