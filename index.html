@@ -8,25 +8,18 @@
   </head>
 
   <body>
-    <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/service-worker.js')
-        // 登録成功
-        .then((registration) => {
-          console.log(
-            'ServiceWorker の登録に成功しました。スコープ: ',
-            registration.scope,
-          )
-          registration.onupdatefound = () => {
-            registration.update()
-          }
-        })
-        // 登録失敗
-        .catch((err) => {
-          console.log('ServiceWorker の登録に失敗しました。', err)
-        })
-    }
+     <script>
+      
+      navigator.serviceWorker.register('/service-worker.js').then(function() {
+
+        console.log('サービスワーカーの登録成功');
+
+      }).catch(function(err) {
+
+        console.log('サービスワーカーの登録ができませんでした：', err);
+
+      });
+    
     </script>
   </body>
 </html>
