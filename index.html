@@ -15,8 +15,24 @@
     <p><a href="https://form.gramin.jp/#!/transfer-session-online-scratch">振替のご連絡</a></p>
     <p><a href="https://form.gramin.jp/#!/cancel-session-online-scratch">キャンセルのご連絡</a></p>
     <p><a href="https://gramin.jp/students-form/">その他のご連絡</a></p>
+    <center>
+   <input type="button" id="push" onclick="return push()" value="クリックするとプッシュ通知が送られます">
+  </center>
     
-    <script>Push.Permission.request();</script>
+    <script>
+ function push(){
+  Push.create("更新情報", 
+   {
+    body: "ブログの更新をお知らせします!",
+    icon: 'casley_logo.png',
+    timeout: 8000,
+    onClick: function () {
+    window.focus(); 
+    this.close();
+    }
+  })
+}
+</script>
     
      <script>
       
