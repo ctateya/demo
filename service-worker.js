@@ -1,5 +1,5 @@
 //キャッシュ名
-var CACHE_NAME = 'cache-v1';
+var CACHE_NAME = 'cache-v2';
 
 //キャッシュに入れるリソースのパス
 var urlsToCache = [
