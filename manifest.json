@@ -1,0 +1,11 @@
+{
+  "name": "PWAのテストサイト",
+  "short_name": "ホーム画面に表示するアプリの省略した名前",
+  "description": "アプリの説明文",
+  "lang": "ja",
+  "start_url": "index.html",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#fff",
+  "background_color": "#fff"
+}
