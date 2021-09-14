@@ -5,8 +5,6 @@ var CACHE_NAME = 'cache-v1';
 var urlsToCache = [
   '/',
   'manifest.json',
-  'logo-img.png',
-  'pwa-icon.png'
 ];
 
 
