@@ -6,6 +6,7 @@
     <title>ぐらみんアプリ（仮）</title>
     <link rel="manifest" href="https://raw.githubusercontent.com/ctateya/demo/main/manifest.json">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   </head>
 
   <body>
@@ -18,35 +19,38 @@
     <center>
    <input type="button" id="push" onclick="return push()" value="クリックするとプッシュ通知が送られます"></button>
   </center>
+  
+  <div id="app">
+  {{ message }}
+</div>
     
     <script>
- function push(){
-  Push.create("お知らせ", 
-   {
-    body: "授業の時間になりました",
-    icon: './icon.png',
-    timeout: 4000,
-    onClick: function () {
-    window.focus(); 
-    this.close();
-    }
-  })
-}
-     
-</script>
-    
-     <script>
+     function push(){
+      Push.create("お知らせ", 
+       {
+        body: "授業の時間になりました",
+        icon: './icon.png',
+        timeout: 4000,
+        onClick: function () {
+        window.focus(); 
+        this.close();
+        }
+      })
+     } 
       
       navigator.serviceWorker.register('https://raw.githubusercontent.com/ctateya/demo/main/service-worker.js').then(function() {
-
         console.log('サービスワーカーの登録成功');
-
       }).catch(function(err) {
-
         console.log('サービスワーカーの登録ができませんでした：', err);
-
       });
     
+      
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!'
+        }
+      })
     </script>
   </body>
 </html>
