@@ -4,7 +4,7 @@
   "description": "アプリの説明文",
   "lang": "ja",
   "icons": [{
-      "src": "icon.png",
+      "src": "./icon.png",
       "sizes":"192x192",
       "type": "image/png"
     }],
