@@ -36,22 +36,23 @@ self.addEventListener('fetch', function(event) {
 
 
 // Service Worker の更新
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', (event) => {
+    var cacheWhitelist = [CACHE_NAME];
 
-  var cacheAllowlist = ['pages-cache-v1', 'blog-posts-cache-v1'];
-
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheAllowlist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cacheName) => {
+                    // ホワイトリストにないキャッシュ(古いキャッシュ)は削除する
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
         })
-      );
-    })
-  );
+    );
 });
+
 
 
 
