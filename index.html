@@ -7,9 +7,6 @@
     <link rel="manifest" href="manifest.json">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
   </head>
 
   <body>
@@ -59,63 +56,6 @@
         console.log('サービスワーカーの登録ができませんでした：', err);
       });
     
-      
-      const homePage = {
-  template: '#home',
-  props: ['myProp']
-};
-
-const newsPage = {
-  template: '#news'
-};
-
-const settingsPage = {
-  template: '#settings'
-};
-
-new Vue({
-  el: '#app',
-  template: '#main',
-  data() {
-    return {
-      activeIndex: 0,
-      tabs: [
-        {
-          icon: this.md() ? null : 'ion-ios-home',
-          label: 'Home',
-          page: homePage,
-          props: {
-            myProp: 'This is a page prop!'
-          },
-          key: "homePage"
-        },
-        {
-          icon: this.md() ? null : 'ion-ios-bell',
-          label: 'News',
-          page: newsPage,
-          badge: 7,
-          key: "newsPage"
-        },
-        {
-          icon: this.md() ? null : 'ion-ios-settings',
-          label: 'Settings',
-          page: settingsPage,
-          key: "settingsPage"
-        }
-      ]
-    };
-  },
-  methods: {
-    md() {
-      return this.$ons.platform.isAndroid();
-    }
-  },
-  computed: {
-    title() {
-      return this.tabs[this.activeIndex].label;
-    }
-  }
-});
     </script>
   </body>
 </html>
