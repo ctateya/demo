@@ -15,11 +15,8 @@ self.addEventListener('install', function(event) {
   
     //キャッシュの中に必要なリソースを格納する
     caches.open(CACHE_NAME).then(function(cache) {
-      
         return cache.addAll(urlsToCache);
-      
-    })
-    
+    }) 
   );
 });
 
@@ -36,22 +33,21 @@ self.addEventListener('activate', function(event) {
         if(CACHE_NAME !== name) caches.delete(name);
       })
     })
-    
   );
 });
 
 
 
-//リクエスト取得状態のイベント処理
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
+// //リクエスト取得状態のイベント処理
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(
     
-    //リクエストに応じたリソースがキャッシュにあればそれを使う
-    caches.match(event.request).then(function(res) {
-        if(res) return res;
+//     //リクエストに応じたリソースがキャッシュにあればそれを使う
+//     caches.match(event.request).then(function(res) {
+//         if(res) return res;
       
-        return fetch(event.request);
-    })
+//         return fetch(event.request);
+//     })
     
-  );
-});
+//   );
+//});
