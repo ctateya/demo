@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <h1>オンラインスクラッチクラス3</h1>
+    <h1>オンラインスクラッチクラス4</h1>
     <h2>今月の授業日程</h2>
     <h2>お申し込みフォーム</h2>
     <p><a href="https://form.gramin.jp/#!/transfer-session-online-scratch">振替のご連絡</a></p>
@@ -34,12 +34,20 @@
         }
       })
      } 
-      
-      navigator.serviceWorker.register('service-worker.js').then(function() {
-        console.log('サービスワーカーの登録成功');
-      }).catch(function(err) {
-        console.log('サービスワーカーの登録ができませんでした：', err);
+     
+     // Service Worker の登録
+     if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          });
       });
+}
+
     
     </script>
   </body>
