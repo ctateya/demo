@@ -1,5 +1,5 @@
 //キャッシュ名
-var CACHE_NAME = 'cache-v4';
+var CACHE_NAME = 'cache-v5';
 
 //キャッシュに入れるリソースのパス
 var urlsToCache = [
@@ -7,47 +7,52 @@ var urlsToCache = [
   'manifest.json',
 ];
 
-
-
-//インストール状態のイベント処理
+// キャッシュを開いてファイルをキャッシュする
 self.addEventListener('install', function(event) {
+  // Perform install steps
   event.waitUntil(
-  
-    //キャッシュの中に必要なリソースを格納する
-    caches.open(CACHE_NAME).then(function(cache) {
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache');
         return cache.addAll(urlsToCache);
-    }) 
+      })
+  );
+});
+
+// キャッシュさせたレスポンスを返す
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
   );
 });
 
 
+// Service Worker の更新
+self.addEventListener('activate', function(event) {
 
-//有効化状態のイベント処理
-self.addEventListener('activate', function(event) {  
+  var cacheAllowlist = ['pages-cache-v1', 'blog-posts-cache-v1'];
+
   event.waitUntil(
-    
-    //現在のキャッシュをすべて取得する
-    caches.keys().then(function(cache) {
-      //新しいキャッシュ以外は削除する
-      cache.map(function(name) {
-        if(CACHE_NAME !== name) caches.delete(name);
-      })
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheAllowlist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
 });
 
 
 
-// //リクエスト取得状態のイベント処理
-// self.addEventListener('fetch', function(event) {
-//   event.respondWith(
-    
-//     //リクエストに応じたリソースがキャッシュにあればそれを使う
-//     caches.match(event.request).then(function(res) {
-//         if(res) return res;
-      
-//         return fetch(event.request);
-//     })
-    
-//   );
-//});
+
